@@ -1,0 +1,25 @@
+{
+  "name": "bakery-activity",
+  "version": "1.0.0",
+  "description": "- an example of building a dynamically generated webpage with SSR in node.js",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hinchley2018/bakery-activity.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hinchley2018/bakery-activity/issues"
+  },
+  "homepage": "https://github.com/hinchley2018/bakery-activity#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2"
+  }
+}
