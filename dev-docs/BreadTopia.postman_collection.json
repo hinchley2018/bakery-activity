@@ -1,0 +1,59 @@
+{
+	"info": {
+		"_postman_id": "24cac92d-f68c-4e27-a304-383e6e61cac8",
+		"name": "BreadTopia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Bread",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "students-are-awesome",
+						"value": "true",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "simple bread",
+							"type": "text"
+						},
+						{
+							"key": "hasGluten",
+							"value": "false",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"value": "https://images.unsplash.com/photo-1595535873420-a599195b3f4a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/breads",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"breads"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

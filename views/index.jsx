@@ -12,6 +12,7 @@ function Index ({breadsList}) {
     return (
         <DefaultLayout title="Index Page">
             <h2>This is a list of breads.</h2>
+            <a href='/breads/new'>Add new bread</a>
             <ul>
                 {breadsList.map((bread, index) => {
                     return (
@@ -22,7 +23,7 @@ function Index ({breadsList}) {
                     })
                 }
             </ul>
-            <p>Here are some words.</p>
+            
         </DefaultLayout>
     )
 }
