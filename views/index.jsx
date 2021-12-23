@@ -1,5 +1,5 @@
 const React = require('react')
-const DefaultLayout = require('./layouts/Default')
+const DefaultLayout = require('./layouts/default')
 
 // Default is our html boilerplate wrapper imported from the layouts directory
 // Everything between <Default> and </Default> in the function below shows up as "html.children" in that component
