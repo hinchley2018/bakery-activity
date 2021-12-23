@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }))
 
 // ROUTES
 app.get('/', function (req, res) {
-  res.send('Hello World')
+  res.render('index')
 })
 
 // BREADS

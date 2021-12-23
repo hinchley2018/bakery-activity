@@ -7,21 +7,21 @@ const breadsList = require('../models/breads')
 // {breadsList: breadsList} passes information that we can use in the 'index' view
 //GET /breads -> view
 router.get('/', (req, res) => {
-    res.render('index', {
+    res.render('breads', {
         breadsList: breadsList
     })
 })
 
 //GET /breads/new -> view
 router.get("/new", (req, res) => {
-    res.render("submitBread")
+    res.render("breads/submitBread")
 })
 
 //GET /breads/:breadId -> view
 router.get('/:breadId', (req, res) => {
     const breadId = req.params.breadId
     const bread = breadsList[breadId]
-    res.render('breadDetails', {
+    res.render('breads/breadDetails', {
         bread: bread
     })
 })

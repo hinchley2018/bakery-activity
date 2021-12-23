@@ -1,5 +1,5 @@
 const React = require('react')
-const DefaultLayout = require('./layouts/default.jsx')
+const DefaultLayout = require('../layouts/default')
 
 function BreadDetail (props) {
     return (
