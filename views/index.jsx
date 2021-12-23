@@ -1,5 +1,5 @@
 const React = require('react')
-const Default = require('./layouts/Default')
+const DefaultLayout = require('./layouts/Default')
 
 // Default is our html boilerplate wrapper imported from the layouts directory
 // Everything between <Default> and </Default> in the function below shows up as "html.children" in that component
@@ -10,12 +10,12 @@ const Default = require('./layouts/Default')
 // We use destructuring to pull out that key on the line below, then we can access breadsList within the function.
 function Index ({breadsList}) {
     return (
-        <Default>
+        <DefaultLayout title="Index Page">
             <h2>This is a list of breads.</h2>
             <ul>
                 {breadsList.map((bread, index) => {
                     return (
-                        <li>
+                        <li key={index}>
                             <a className="bread" href={`/breads/${index}`}>{bread.name}</a>
                         </li>
                         )
@@ -23,7 +23,7 @@ function Index ({breadsList}) {
                 }
             </ul>
             <p>Here are some words.</p>
-        </Default>
+        </DefaultLayout>
     )
 }
 
