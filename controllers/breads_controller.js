@@ -33,6 +33,14 @@ router.get('/:breadIndex', (req, res) => {
     }
 })
 
+router.get('/:breadIndex/edit', (req,res) => {
+    const props = {
+        bread: breadsList[req.params.breadIndex],
+        index: req.params.breadIndex
+    }
+    res.render('breads/editBread', props)
+})
+
 //POST /breads <-
 router.post("/", (req, res) => {
     console.log("POST /breads recieved")
@@ -47,6 +55,21 @@ router.post("/", (req, res) => {
     // or send the back the id
     res.redirect("/breads")
 
+})
+
+//UPDATE /breads/:index <- update a bread in the breadsList
+router.put('/:breadIndex', (req, res) => {
+    if (req.body.hasGluten === "on") {
+        req.body.hasGluten = true
+    } else {
+        req.body.hasGluten = false
+    }
+    if (breadsList[req.params.breadIndex]) {
+        breadsList[req.params.breadIndex] = req.body
+        res.redirect(`/breads/${req.params.breadIndex}`)
+    } else {
+        res.send(404)
+    }
 })
 
 
