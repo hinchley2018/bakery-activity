@@ -57,9 +57,10 @@ router.delete('/:breadIndex', (req, res) => {
     //if it exists
     if (breadsList[index]) {
         //remove from that breadList
+        let bread = breadsList[index]
         breadsList.splice(index, 1)
 
-        res.send(breadsList)
+        res.send({"message": "deleted", "breadDeleted": bread})
     }
     else {
         res.render('error404')
