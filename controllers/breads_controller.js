@@ -17,12 +17,13 @@ router.get("/new", (req, res) => {
     res.render("breads/submitBread")
 })
 
-//GET /breads/:breadId -> view
-router.get('/:breadId', (req, res) => {
-    const breadId = req.params.breadId
-    const bread = breadsList[breadId]
+//GET /breads/:breadIndex -> view
+router.get('/:breadIndex', (req, res) => {
+    const breadIndex = req.params.breadIndex
+    const bread = breadsList[breadIndex]
     res.render('breads/breadDetails', {
-        bread: bread
+        bread: bread,
+        index: breadIndex
     })
 })
 
@@ -39,8 +40,25 @@ router.post("/", (req, res) => {
     //either redirect to the index
     // or send the back the id
     res.redirect("/breads")
-    
+
 })
 
+
+//DELETE /breads/:index <- remove a bread from breadsList
+router.delete('/:breadIndex', (req, res) => {
+
+    let index = req.params.breadIndex
+    //if it exists
+    if (breadsList[index]) {
+        //remove from that breadList
+        breadsList.splice(index, 1)
+
+        res.send(breadsList)
+    }
+    else {
+        res.render('error404')
+    }
+
+})
 
 module.exports = router
