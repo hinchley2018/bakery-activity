@@ -12,6 +12,9 @@ function BreadDetail (props) {
             >
                 <input type="submit" value="DELETE"/>
             </form>
+            <a href={`/breads/${props.index}/edit`}>
+                <button type="button">EDIT</button>
+            </a>
             <p>{
                 props.bread.hasGluten ?
                 'This bread has gluten.' 
