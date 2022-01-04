@@ -20,11 +20,17 @@ router.get("/new", (req, res) => {
 //GET /breads/:breadIndex -> view
 router.get('/:breadIndex', (req, res) => {
     const breadIndex = req.params.breadIndex
+    //if it exists
     const bread = breadsList[breadIndex]
-    res.render('breads/breadDetails', {
-        bread: bread,
-        index: breadIndex
-    })
+    if(bread){
+        res.render('breads/breadDetails', {
+            bread: bread,
+            index: breadIndex
+        })
+    }
+    else {
+        res.render('error404')
+    }
 })
 
 //POST /breads <-
