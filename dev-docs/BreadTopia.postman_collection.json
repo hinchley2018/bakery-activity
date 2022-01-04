@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a2844ab5-ab7e-42a7-bbb4-22ffba868bf8",
+		"_postman_id": "ffbee6bc-4f7b-4709-8c13-171f25be32f6",
 		"name": "BreadTopia",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -89,6 +89,41 @@
 					"port": "3000",
 					"path": [
 						"breads"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Bread",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Banana Bread",
+							"type": "text"
+						},
+						{
+							"key": "hasGluten",
+							"value": "on",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/breads/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"breads",
+						"2"
 					]
 				}
 			},
