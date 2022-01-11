@@ -117,13 +117,20 @@ router.put('/:breadId', (req, res) => {
     }
     let {breadId} = req.params
     breadModel.findByIdAndUpdate(breadId, req.body, {runValidators: true})
+        //sucesss
         .then(result => {
             console.log("Success", result)
             res.redirect(`/breads/${breadId}`)
         })
+        //any errors
         .catch(err => {
             console.error("Error",err)
-            res.status(400).send({"error": err})
+            
+            //if it was validation error
+            if (err.Errors[0].baker.name === "ValidatorError"){
+                res.status(400).send(err)
+            }
+            
 
         })
     // if (breadsList[req.params.breadIndex]) {
