@@ -98,6 +98,10 @@ router.post("/", (req, res) => {
             console.log(result)
             res.redirect("/breads")
         })
+        .catch(err => {
+            console.error(err)
+            res.status(400).send({"error": "validation failed"})
+        })
     //either redirect to the index
     // or send the back the id
     // res.redirect("/breads")
@@ -111,11 +115,17 @@ router.put('/:breadId', (req, res) => {
     } else {
         req.body.hasGluten = false
     }
-    breadModel.findByIdAndUpdate(req.params.breadId, req.body)
+    let {breadId} = req.params
+    breadModel.findOneAndUpdate(breadId, req.body, {runValidators: true})
         .then(result => {
-            res.redirect(`/breads/${req.params.breadId}`)
+            console.log("Success", result)
+            res.redirect(`/breads/${breadId}`)
         })
-        .catch(err => res.send(404))
+        .catch(err => {
+            console.error("Error",err)
+            res.status(400).send({"error": err})
+
+        })
     // if (breadsList[req.params.breadIndex]) {
     //     breadsList[req.params.breadIndex] = req.body
     //     res.redirect(`/breads/${req.params.breadIndex}`)
