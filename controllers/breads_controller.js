@@ -116,7 +116,7 @@ router.put('/:breadId', (req, res) => {
         req.body.hasGluten = false
     }
     let {breadId} = req.params
-    breadModel.findOneAndUpdate(breadId, req.body, {runValidators: true})
+    breadModel.findByIdAndUpdate(breadId, req.body, {runValidators: true})
         .then(result => {
             console.log("Success", result)
             res.redirect(`/breads/${breadId}`)
