@@ -16,8 +16,8 @@ function Index ({breadsList}) {
             <ul>
                 {breadsList.map((bread, index) => {
                     return (
-                        <li key={index}>
-                            <a className="bread" href={`/breads/${index}`}>{bread.name}</a>
+                        <li key={bread._id}>
+                            <a className="bread" href={`/breads/${bread._id}`}>{bread.name}</a>
                         </li>
                         )
                     })
