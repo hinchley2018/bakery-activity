@@ -16,9 +16,6 @@ router.get('/', (req, res) => {
                 })
         })
 
-    // res.render('breads', {
-    //     breadsList: breadsList
-    // })
 })
 
 //GET /breads/new -> view
@@ -38,16 +35,9 @@ router.get('/:breadId', (req, res) => {
                 index: breadId
             })
         })
-    // const bread = breadsList[breadId]
-    // if(bread){
-    //     res.render('breads/breadDetails', {
-    //         bread: bread,
-    //         index: breadId
-    //     })
-    // }
-    // else {
-    //     res.render('error404')
-    // }
+        .catch(err => {
+            res.render('error404')
+        })
 })
 
 router.get('/:breadId/edit', (req,res) => {
@@ -55,52 +45,39 @@ router.get('/:breadId/edit', (req,res) => {
     //if it exists
     breadModel.findById(breadId)
         .then(result => {
-            console.log(result)
             if (result) {
-
-                console.log(result)
                 res.render('breads/editBread', {
                     bread: result,
                     index: breadId
                 })
             } else {
-                res.send(404)
+                res.render("error404")
             }
         })
-        .catch(err => res.send(404))
-    // const props = {
-    //     bread: breadsList[req.params.breadId],
-    //     index: req.params.breadIndex
-    // }
-    // res.render('breads/editBread', props)
+        .catch(err => {
+            res.render("error404")
+        })
 })
 
 //POST /breads <-
 router.post("/", (req, res) => {
-    console.log("POST /breads recieved")
-    console.log(req.headers)
-    console.log(req.body)
+    
     //TODO: validate this is a valid bread
     //insert that bread from req.body into breads list
-    // console.log("before", breadsList.length)
-    // breadsList.push(req.body)
-    // console.log("after", breadsList.length)
-
     if (req.body.hasGluten === "on") {
         req.body.hasGluten = true
     } else {
         req.body.hasGluten = false
     }
-    console.log('hi')
 
     breadModel.create(req.body)
         .then(result => {
-            console.log(result)
+            
             res.redirect("/breads")
         })
-    //either redirect to the index
-    // or send the back the id
-    // res.redirect("/breads")
+        .catch(err => {
+            res.status(400)
+        })
 
 })
 
@@ -115,13 +92,9 @@ router.put('/:breadId', (req, res) => {
         .then(result => {
             res.redirect(`/breads/${req.params.breadId}`)
         })
-        .catch(err => res.send(404))
-    // if (breadsList[req.params.breadIndex]) {
-    //     breadsList[req.params.breadIndex] = req.body
-    //     res.redirect(`/breads/${req.params.breadIndex}`)
-    // } else {
-    //     res.send(404)
-    // }
+        .catch(err => {
+            res.render("error404")
+        })
 })
 
 
