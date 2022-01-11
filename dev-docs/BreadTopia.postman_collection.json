@@ -6,7 +6,63 @@
 	},
 	"item": [
 		{
-			"name": "Create Bread",
+			"name": "Update Bread",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "students-are-awesome",
+						"value": "true",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "simple bread",
+							"type": "text"
+						},
+						{
+							"key": "hasGluten",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"value": "https://images.unsplash.com/photo-1595535873420-a599195b3f4a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
+							"type": "text"
+						},
+						{
+							"key": "baker",
+							"value": "jonathon",
+							"type": "default"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/breads/61dcd72e628766cc7189e8a9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"breads",
+						"61dcd72e628766cc7189e8a9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create bread",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -61,7 +117,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/breads/1",
+					"raw": "http://localhost:3000/breads/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -69,7 +125,7 @@
 					"port": "3000",
 					"path": [
 						"breads",
-						"1"
+						"2"
 					]
 				}
 			},

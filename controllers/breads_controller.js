@@ -12,8 +12,8 @@ router.get('/', (req, res) => {
     breadModel.find()
         .then(breads => {
             res.render('breads', {
-                    breadsList: breads
-                })
+                breadsList: breads
+            })
         })
 
 })
@@ -40,7 +40,7 @@ router.get('/:breadId', (req, res) => {
         })
 })
 
-router.get('/:breadId/edit', (req,res) => {
+router.get('/:breadId/edit', (req, res) => {
     const breadId = req.params.breadId
     //if it exists
     breadModel.findById(breadId)
@@ -61,7 +61,7 @@ router.get('/:breadId/edit', (req,res) => {
 
 //POST /breads <-
 router.post("/", (req, res) => {
-    
+
     //TODO: validate this is a valid bread
     //insert that bread from req.body into breads list
     if (req.body.hasGluten === "on") {
@@ -72,11 +72,12 @@ router.post("/", (req, res) => {
 
     breadModel.create(req.body)
         .then(result => {
-            
+
             res.redirect("/breads")
         })
         .catch(err => {
-            res.status(400)
+            console.error(err)
+            res.status(400).send({ "error": "validation failed" })
         })
 
 })
@@ -88,12 +89,24 @@ router.put('/:breadId', (req, res) => {
     } else {
         req.body.hasGluten = false
     }
-    breadModel.findByIdAndUpdate(req.params.breadId, req.body)
+    let { breadId } = req.params
+    breadModel.findByIdAndUpdate(breadId, req.body, { runValidators: true })
+        //sucesss
         .then(result => {
-            res.redirect(`/breads/${req.params.breadId}`)
+            res.redirect(`/breads/${breadId}`)
         })
+        //any errors
         .catch(err => {
-            res.render("error404")
+            if (err.kind === "ObjectId" && err.name === "CastError") {
+                res.status(400).send(`InvalidId: ${err.value}`)
+            }
+            //if it was validation error
+            else if (err.Errors && err.Errors[0].baker.name === "ValidatorError") {
+                res.status(400).send(err)
+            }
+
+            else { res.status(500).send(err) }
+
         })
 })
 
@@ -108,7 +121,7 @@ router.delete('/:breadIndex', (req, res) => {
         let bread = breadsList[index]
         breadsList.splice(index, 1)
 
-        res.send({"message": "deleted", "breadDeleted": bread})
+        res.send({ "message": "deleted", "breadDeleted": bread })
     }
     else {
         res.render('error404')
