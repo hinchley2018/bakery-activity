@@ -33,6 +33,7 @@ router.get('/:breadId', (req, res) => {
     const breadId = req.params.breadId
     //if it exists
     breadModel.findById(breadId)
+        .populate('baker')
         .then(result => {
             res.render('breads/breadDetails', {
                 bread: result,
