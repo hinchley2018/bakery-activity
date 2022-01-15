@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const breadsList = require('../models/breads')
 const breadModel = require('../models/bread')
+const bakerModel = require('../models/baker')
 
 // This route renders a list of breads
 // 'index' is the name of the file in our views folder to render as this view
@@ -20,7 +21,12 @@ router.get('/', (req, res) => {
 
 //GET /breads/new -> view
 router.get("/new", (req, res) => {
-    res.render("breads/submitBread")
+    bakerModel.find()
+        .then(foundBakers => {
+            res.render("breads/submitBread", {
+                bakers: foundBakers
+            })
+        })
 })
 
 //GET /breads/:breadIndex -> view
