@@ -18,6 +18,12 @@ function BakerDetails (props) {
                     })
                 }
             </ul>
+            <form
+                action={`/bakers/${props.baker._id}?_method=DELETE`}
+                method="POST"
+            >
+                <input type="submit" value="DELETE"/>
+            </form>
         </DefaultLayout>
     )
 }

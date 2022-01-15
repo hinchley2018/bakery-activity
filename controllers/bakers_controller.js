@@ -15,4 +15,16 @@ router.get("/:id", (req,res) => {
         })
 })
 
+router.delete('/:id', (req, res) => {
+    bakerModel.findByIdAndDelete(req.params.id)
+        .then(deleteResult => {
+            console.log(deleteResult)
+            res.redirect('/breads')
+        })
+        .catch(err => {
+            console.log(err)
+            res.render('error404')
+        })
+})
+
 module.exports = router
