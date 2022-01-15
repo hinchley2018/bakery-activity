@@ -25,6 +25,14 @@ function editBread(props) {
                     id="image" 
                     defaultValue={props.bread.image}
                     required/>
+                <br />                
+                <select name="baker" defaultValue={props.bread.baker}>
+                    {
+                        props.bakers.map(baker => {
+                            return <option value={baker._id} key={baker._id}>{baker.name}</option>
+                        })
+                    }
+                </select>
                 <br />
                 <label htmlFor='hasGluten'>Has Gluten?</label>
                 <input 

@@ -5,7 +5,9 @@ function BreadDetail (props) {
     return (
         <DefaultLayout title={props.bread.name}>
             <h1>We are on the BREAD DETAIL page!</h1>
+            <a href='/breads'> Go back to index</a>
             <h2>{props.bread.name}</h2>
+            {/* <h3>Baked by {props.bread.baker}</h3> */}
             <form
                 action={`/breads/${props.index}?_method=DELETE`}
                 method="POST"

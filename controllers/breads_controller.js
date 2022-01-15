@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const breadsList = require('../models/breads')
 const breadModel = require('../models/bread')
 const bakerModel = require('../models/baker')
 
@@ -35,7 +34,6 @@ router.get('/:breadId', (req, res) => {
     //if it exists
     breadModel.findById(breadId)
         .then(result => {
-            console.log(result)
             res.render('breads/breadDetails', {
                 bread: result,
                 index: breadId
@@ -52,10 +50,14 @@ router.get('/:breadId/edit', (req, res) => {
     breadModel.findById(breadId)
         .then(result => {
             if (result) {
-                res.render('breads/editBread', {
-                    bread: result,
-                    index: breadId
-                })
+                bakerModel.find()
+                    .then(bakers => {
+                        res.render('breads/editBread', {
+                            bread: result,
+                            bakers: bakers,
+                            index: breadId
+                        })
+                    })
             } else {
                 res.render("error404")
             }
@@ -118,18 +120,14 @@ router.put('/:breadId', (req, res) => {
 
 
 //DELETE /breads/:index <- remove a bread from breadsList
-router.delete('/:breadIndex', (req, res) => {
+router.delete('/:breadId', (req, res) => {
 
-    let index = req.params.breadIndex
-    //if it exists
-    if (breadsList[index]) {
-        //remove from that breadList
-        let bread = breadsList[index]
-        breadsList.splice(index, 1)
-
-        res.send({ "message": "deleted", "breadDeleted": bread })
-    }
-    else {
+    try {
+        breadModel.findByIdAndDelete(req.params.breadId)
+            .then(deletedBread => {
+                res.redirect('/breads')
+            })
+    } catch {
         res.render('error404')
     }
 
