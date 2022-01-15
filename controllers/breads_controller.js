@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const breadsList = require('../models/breads')
 const breadModel = require('../models/bread')
+const bakerModel = require('../models/baker')
 
 // This route renders a list of breads
 // 'index' is the name of the file in our views folder to render as this view
@@ -20,7 +20,12 @@ router.get('/', (req, res) => {
 
 //GET /breads/new -> view
 router.get("/new", (req, res) => {
-    res.render("breads/submitBread")
+    bakerModel.find()
+        .then(foundBakers => {
+            res.render("breads/submitBread", {
+                bakers: foundBakers
+            })
+        })
 })
 
 //GET /breads/:breadIndex -> view
@@ -28,8 +33,8 @@ router.get('/:breadId', (req, res) => {
     const breadId = req.params.breadId
     //if it exists
     breadModel.findById(breadId)
+        .populate('baker')
         .then(result => {
-            console.log(result)
             res.render('breads/breadDetails', {
                 bread: result,
                 index: breadId
@@ -46,10 +51,14 @@ router.get('/:breadId/edit', (req, res) => {
     breadModel.findById(breadId)
         .then(result => {
             if (result) {
-                res.render('breads/editBread', {
-                    bread: result,
-                    index: breadId
-                })
+                bakerModel.find()
+                    .then(bakers => {
+                        res.render('breads/editBread', {
+                            bread: result,
+                            bakers: bakers,
+                            index: breadId
+                        })
+                    })
             } else {
                 res.render("error404")
             }
@@ -112,18 +121,14 @@ router.put('/:breadId', (req, res) => {
 
 
 //DELETE /breads/:index <- remove a bread from breadsList
-router.delete('/:breadIndex', (req, res) => {
+router.delete('/:breadId', (req, res) => {
 
-    let index = req.params.breadIndex
-    //if it exists
-    if (breadsList[index]) {
-        //remove from that breadList
-        let bread = breadsList[index]
-        breadsList.splice(index, 1)
-
-        res.send({ "message": "deleted", "breadDeleted": bread })
-    }
-    else {
+    try {
+        breadModel.findByIdAndDelete(req.params.breadId)
+            .then(deletedBread => {
+                res.redirect('/breads')
+            })
+    } catch {
         res.render('error404')
     }
 

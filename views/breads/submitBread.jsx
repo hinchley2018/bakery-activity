@@ -1,7 +1,7 @@
 const React = require('react')
 const DefaultLayout = require("../layouts/default")
 
-function submitBread() {
+function submitBread(props) {
     return (
         <DefaultLayout>
             <h2>Add a new bread</h2>
@@ -12,6 +12,15 @@ function submitBread() {
             >
                 <label htmlFor='name'>Name</label>
                 <input type="text" name="name" id="name" required />
+                <br />
+                <label htmlFor='baker'>Baker</label>
+                <select name="baker">
+                    {
+                        props.bakers.map(baker => {
+                            return <option value={baker._id} key={baker._id}>{baker.name}</option>
+                        })
+                    }
+                </select>
                 <br />
                 <label htmlFor='image'>Image url</label>
                 <input type="text" name="image" id="image" required/>
