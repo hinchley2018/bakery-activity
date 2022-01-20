@@ -27,6 +27,10 @@ app.get('/', function (req, res) {
   res.render('index')
 })
 
+// API
+const apiRouter = require('./api')
+app.use('/api', apiRouter)
+
 // BREADS
 const breadsController = require('./controllers/breads_controller')
 app.use('/breads', breadsController)
