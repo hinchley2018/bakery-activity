@@ -36,4 +36,22 @@ router.post("/", (req, res) => {
 
 })
 
+router.put('/:id', async (req,res) => {
+    try {
+        const bread = await breadModel.updateOne({_id: req.params.id}, req.body).orFail()
+        res.json(bread)
+    } catch (err) {
+        res.status(404).send(err)
+    }
+})
+
+router.delete('/:id', async (req,res) => {
+    try {
+        const bread = await breadModel.deleteOne({_id: req.params.id}).orFail()
+        res.json(bread)
+    } catch (err) {
+        res.status(404).send(err)
+    }
+})
+
 module.exports = router
