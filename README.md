@@ -17,6 +17,8 @@
 I heard about something called server-side rendering at a tech conference, perhaps your team can take advantage of that?
 
 
+## [Api Architecture Diagram](dev-docs/BreadHeadsApiArch.png)
+
 ## Getting Started
 - fork & clone the project
 - `cd bakery-activity`
